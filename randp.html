@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<hl lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width" initial-scale=1.0">
+    <title>Random pics using External API</title>
+<style>
+body{
+    background-image:linear-gradient( 180deg, rgb(168, 255, 197)23.8%,rgb(248, 155, 159) 92%);
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    height:100vh;
+    margin:0;
+}
+.results{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+   
+}
+.result{
+    background-color:#fff;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    margin:10px;
+    height: 400px;
+    width:300px;
+}
+.result img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.buttons{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+.button{
+    margin: 10px;
+    padding:10px;
+    width:300px;
+    font-size: 20px;
+    background-color:rgb(180, 180, 245);
+}
+.button:active{
+transform: scale(0,98);
+}
+</style>
+
+
+
+</head>
+<body>
+    <div class="results">
+        <div id="dog_result" class="result">
+            <p>Random Dog placeholder</p>
+        </div>
+        <div id="cat_result" class=result>
+            <p>Random Cat placeholder</p>
+        </div>
+    </div>
+<div class="buttons">
+    <button id="dog_btn" class="button">Get Dog</button>
+    <button id="cat_btn" class="button">Get Cat</button>
+</div>
+
+
+<script>
+const dog_result=document.getElementById(' dog_result');
+const cat_result=document.getElementById('cat_result');
+const dog_btn=document.getElementById('dog_btn');
+const cat_btn=document.getElementById('cat_btn');
+
+dog_btn.addEventListener('click',getRandomDog)
+cat_btn.addEventListener('click',getRandomCat)
+
+function getRandomDog(){
+    fetch('https://random.dog/woof.json')
+    .then(res =>res.json())
+    .then(data=>{
+        dog_result.innerHTML ='<img src="${data.url}"/>'
+       console.log(data);
+    })
+}
+function getRandomCat(){
+    fetch('https://aws.random.cat/meow')
+    .then(res =>res.json())
+    .then(data=>{
+        cat_result.innerHTML='<img src="${data.file}"/>'
+    })
+}
+</script>
+
+
+
+
+
+</body>
+</html>
